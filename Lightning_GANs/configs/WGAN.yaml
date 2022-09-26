@@ -1,0 +1,43 @@
+model_params:
+    name: WGAN
+    latent_dim: 8
+    critic_iterations: 3
+    weight_clip: 0.01
+    learning_rate: 1.e-05
+    weight_decay: 0.0
+    scheduler_gamma: 1.0
+
+general_params:
+    manual_seed: 1234
+
+DataModule_params:
+    data_path: /data1/dose-3d-generative/data/training-data/NPs_without_VR_without_PEAK/new/photons_E5.8_s1.0_a0.0.npy
+    batch_size: 10000
+    num_workers: 0
+    test_fraction: 0.0
+    validation_fraction: 0.4
+    shuffle_train: true
+    random_seed: 123
+    columns_keys:
+    - E
+    - X
+    - Y
+    - dX
+    - dY
+    - dZ
+
+checkpoint_params:
+    filename: checkpoint_WGAN_0109_{epoch}epoch
+    auto_insert_metric_name: false
+    save_last: true
+    save_top_k: -1
+    every_n_epochs: 10
+
+trainer_params:
+    max_epochs: 300
+    log_every_n_steps: 1
+
+CSVLogger_params:
+    save_dir: "/home/jakmic/Projekty/dose3d-phsp/GAN/Lightning_GANs/results/"
+    name: 'WGAN'
+    # version: null

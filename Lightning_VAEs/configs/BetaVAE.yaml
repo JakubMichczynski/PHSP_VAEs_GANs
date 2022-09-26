@@ -1,0 +1,43 @@
+model_params:
+  name: BetaVAE
+  beta_weight: 0.8
+  bias_correction_term: 0.00166 # batch_size/num_of_photons
+  learning_rate: 0.005
+  weight_decay: 0.0
+  scheduler_gamma: 1.0
+  # model_architecture_name: VAE_Linear_2605
+
+general_params:
+  manual_seed: 1234
+
+DataModule_params:
+  data_path: null
+  batch_size: 10000
+  num_workers: 0
+  test_fraction: 0.0
+  validation_fraction: 0.4
+  shuffle_train: true
+  random_seed: 123
+  columns_keys:
+  - E
+  - X
+  - Y
+  - dX
+  - dY
+  - dZ
+  
+checkpoint_params:
+  filename: checkpoint_BetaVAE_1008_{epoch}epoch
+  auto_insert_metric_name: false
+  save_last: true
+  save_top_k: -1
+  every_n_epochs: 10
+
+trainer_params:
+  max_epochs: 300
+  log_every_n_steps: 1
+
+CSVLogger_params:
+  save_dir: "/results"
+  name: 'BetaVAE'
+  # version: null
